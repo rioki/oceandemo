@@ -16,6 +16,7 @@ namespace od
     };
 
     Mesh::Mesh() 
+    : vao(0)
     {
         std::memset(&buffers, 0, 5 * sizeof(unsigned int));
     }
@@ -53,6 +54,9 @@ namespace od
         {
             compute_tangents();
         }
+
+        glGenVertexArrays(1, &vao);
+        glBindVertexArray(vao);
         
         glGenBuffers(5, buffers);
         
@@ -77,12 +81,15 @@ namespace od
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, fcount * 3 * sizeof(unsigned int), &faces[0], GL_STATIC_DRAW);  
                 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+        glBindVertexArray(0);
     }
 
     void Mesh::release()
     {
         if (buffers[0] != 0)
         {
+            glDeleteVertexArrays(1, &vao);
             glDeleteBuffers(5, buffers);
             std::memset(&buffers, 0, 5 * sizeof(unsigned int));
         }
@@ -94,6 +101,9 @@ namespace od
         {
             const_cast<Mesh*>(this)->upload(); 
         }
+
+        // NOTE: we may not need the glBindBuffer here
+        glBindVertexArray(vao);
 
         int vertex_location   = shader.get_attribute_location("aVertex");
         int normal_location   = shader.get_attribute_location("aNormal");
@@ -153,6 +163,8 @@ namespace od
         {
             glDisableVertexAttribArray(tangent_location);
         }
+
+        glBindVertexArray(0);
     }
 
     void Mesh::compute_tangents()

@@ -36,7 +36,7 @@ namespace od
         }
         
         // TODO set to 3.2
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
         
@@ -46,7 +46,7 @@ namespace od
             throw std::runtime_error(SDL_GetError());
         }  
         
-        
+        glewExperimental = GL_TRUE;
         GLenum err = glewInit();
         if (GLEW_OK != err)
         {
@@ -105,8 +105,7 @@ namespace od
     }
 
     void Application::handle_events()
-    {
-        
+    {        
         SDL_Event event;
         while (SDL_PollEvent(&event)) 
         {

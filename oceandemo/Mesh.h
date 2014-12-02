@@ -42,6 +42,7 @@ namespace od
         std::vector<Vector3> tangents;
         std::vector<Face>    faces;
 
+        unsigned int vao;
         unsigned int buffers[5];
         
         void compute_tangents();
