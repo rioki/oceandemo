@@ -6,22 +6,9 @@
 
 namespace od
 {
-    const char* vertex = "#version 330 core\n"
-                         "in vec3 aVertex;\n"
-                         "void main()\n"
-                         "{\n"
-                         "  gl_Position = vec4(aVertex, 1.0);\n"
-                         "}\n";
-
-    const char* fragment = "#version 330 core\n"
-                           "out vec4 oFragColor;\n"
-                           "void main()\n"
-                           "{\n"
-                           "  oFragColor = vec4(0.7, 0.5, 1.0, 1.0);\n"
-                           "}\n";
-
     Application::Application()
-    : running(false), window(nullptr), glcontext(nullptr)
+    : running(false), window(nullptr), glcontext(nullptr),
+      camera(nullptr), ocean(nullptr)
     {
         int r = SDL_Init(SDL_INIT_VIDEO);
         if (r != 0) 
@@ -51,19 +38,12 @@ namespace od
         if (GLEW_OK != err)
         {
             throw std::runtime_error((const char*)glewGetErrorString(err));
-        }
+        }        
 
-        // TEST
+        // everything that uses OpenGL need to be initialized after glew, thus pointers.
 
-        triangle.add_vertex(Vector3(-1.0f, -1.0f, 0.0f), Vector3(0.0f, 0.0f, 1.0f), Vector2(0.0f, 0.0f));
-        triangle.add_vertex(Vector3( 1.0f, -1.0f, 0.0f), Vector3(0.0f, 0.0f, 1.0f), Vector2(0.0f, 0.0f));
-        triangle.add_vertex(Vector3( 0.0f,  1.0f, 0.0f), Vector3(0.0f, 0.0f, 1.0f), Vector2(0.0f, 0.0f));
-        triangle.add_face(0, 1, 2);
-
-        shader.set_vertex_code(vertex);
-        shader.set_fragment_code(fragment);
-        shader.compile();
-        
+        camera = new Camera;
+        ocean  = new Ocean;
     }
 
     Application::~Application() 
@@ -98,8 +78,7 @@ namespace od
         glViewport(0, 0, 1600, 900);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        shader.bind();
-        triangle.draw(shader);
+        ocean->draw(*camera);
             
         SDL_GL_SwapWindow(window); 
     }

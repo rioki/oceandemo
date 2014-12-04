@@ -7,6 +7,9 @@
 #include "Mesh.h"
 #include "Shader.h"
 
+#include "Camera.h"
+#include "Ocean.h"
+
 namespace od
 {
     class Application
@@ -27,8 +30,8 @@ namespace od
         void draw();
         void handle_events();
 
-        Mesh   triangle;
-        Shader shader;
+        Camera* camera;
+        Ocean*  ocean;
 
         Application(const Application&) = delete;
         const Application& operator = (const Application&) = delete;
