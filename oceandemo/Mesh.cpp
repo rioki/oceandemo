@@ -182,17 +182,17 @@ namespace od
             Vector2 w2 = texcoords[face.b];
             Vector2 w3 = texcoords[face.c];
             
-            float x1 = v2.x - v1.x;
-            float x2 = v3.x - v1.x;
-            float y1 = v2.y - v1.y;
-            float y2 = v3.y - v1.y;
-            float z1 = v2.z - v1.z;
-            float z2 = v3.z - v1.z;
+            float x1 = v2(0) - v1(0);
+            float x2 = v3(0) - v1(0);
+            float y1 = v2(1) - v1(1);
+            float y2 = v3(1) - v1(1);
+            float z1 = v2(2) - v1(2);
+            float z2 = v3(2) - v1(2);
             
-            float s1 = w2.x - w1.x;
-            float s2 = w3.x - w1.x;
-            float t1 = w2.y - w1.y;
-            float t2 = w3.y - w1.y;
+            float s1 = w2(0) - w1(0);
+            float s2 = w3(0) - w1(0);
+            float t1 = w2(1) - w1(1);
+            float t2 = w3(1) - w1(1);
             
             float r = 1.0F / (s1 * t2 - s2 * t1);
             Vector3 sdir((t2 * x1 - t1 * x2) * r, (t2 * y1 - t1 * y2) * r, (t2 * z1 - t1 * z2) * r);

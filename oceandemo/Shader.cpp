@@ -122,4 +122,13 @@ namespace od
     {
         return glGetAttribLocation(program_id, name.c_str());
     }
+
+    void Shader::set_uniform(const std::string& name, const Matrix44& value)
+    {
+        int location = glGetUniformLocation(program_id, name.c_str());
+        if (location != -1)
+        {
+            glUniformMatrix4fv(location, 1, GL_FALSE, value.c_array());
+        }
+    }
 }

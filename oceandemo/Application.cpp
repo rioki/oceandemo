@@ -43,6 +43,8 @@ namespace od
         // everything that uses OpenGL need to be initialized after glew, thus pointers.
 
         camera = new Camera;
+        // CHECK ME
+        camera->translate(Vector3(0, 0, -3));
         ocean  = new Ocean;
     }
 

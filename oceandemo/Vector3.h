@@ -4,15 +4,33 @@
 
 namespace od
 {
+    class Vector2;
+    class Vector4;
+
     class Vector3
     {
     public:
-        float x, y, z;
-
         Vector3();
 
-        Vector3(float _x, float _y, float _z);
+        Vector3(float x, float y, float z);
 
+        explicit Vector3(const Vector2& other);
+
+        explicit Vector3(const Vector4& other);
+
+        Vector3(const Vector3& other);
+
+        const Vector3& operator = (const Vector3& other);
+
+        float& operator () (unsigned int i);
+
+        float operator () (unsigned int i) const;
+
+        const Vector3& operator += (const Vector3& other);
+        const Vector3& operator -= (const Vector3& other);
+
+    private:
+        float data[3];
     };
 
     Vector3 operator - (const Vector3& v);

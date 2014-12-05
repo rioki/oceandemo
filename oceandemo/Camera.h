@@ -2,27 +2,29 @@
 #ifndef _OD_CAMERA_H_
 #define _OD_CAMERA_H_
 
-#include "Vector3.h"
+#include "Entity.h"
 #include "Shader.h"
+#include "Vector3.h"
+#include "Matrix44.h"
 
 namespace od
 {
-    class Camera 
+    class Camera : public Entity
     {
     public:
         Camera();
 
         ~Camera();
 
-        void setup(Shader& shader);
+        void setup(Shader& shader) const;        
 
     private:
         float fov;
         float zNear;
         float zFar;
 
-        Vector3 position;
-        //Vector4 orientation;
+        mutable Matrix44 projection;
+        mutable Matrix44 view;
     };
 }
 

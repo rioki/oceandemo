@@ -4,6 +4,8 @@
 
 #include <string>
 
+#include "Matrix44.h"
+
 namespace od
 {
     class Shader
@@ -31,6 +33,8 @@ namespace od
         void release();
         
         int get_attribute_location(const std::string& name) const;
+
+        void set_uniform(const std::string& name, const Matrix44& value);
 
     private:
         std::string vertex_code;
