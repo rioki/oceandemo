@@ -33,7 +33,7 @@ namespace od
 
     Ocean::~Ocean() {}
 
-    void Ocean::draw(Camera& camera) 
+    void Ocean::draw(Camera& camera) const
     {
         shader.bind();
         

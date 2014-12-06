@@ -8,7 +8,7 @@
 #include "Shader.h"
 
 #include "Camera.h"
-#include "Ocean.h"
+#include "Scene.h"
 
 namespace od
 {
@@ -27,11 +27,14 @@ namespace od
         SDL_Window*   window;
         SDL_GLContext glcontext;
 
+        Scene* scene;
+        Camera* camera;
+
         void draw();
         void handle_events();
 
-        Camera* camera;
-        Ocean*  ocean;
+        void handle_key_press(SDL_Keysym key);
+        void handle_key_release(SDL_Keysym key);
 
         Application(const Application&) = delete;
         const Application& operator = (const Application&) = delete;

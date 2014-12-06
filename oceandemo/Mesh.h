@@ -22,11 +22,11 @@ namespace od
 
         void add_face(unsigned int a, unsigned int b, unsigned int c);
 
-        void upload();
+        void upload() const;
 
-        void release();
+        void release() const;
 
-        void draw(Shader& shader) const;
+        void draw(const Shader& shader) const;
 
     private:
         struct Face
@@ -42,8 +42,8 @@ namespace od
         std::vector<Vector3> tangents;
         std::vector<Face>    faces;
 
-        unsigned int vao;
-        unsigned int buffers[5];
+        mutable unsigned int vao;
+        mutable unsigned int buffers[5];
         
         void compute_tangents();
 

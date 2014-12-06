@@ -34,7 +34,7 @@ namespace od
         return fragment_code;
     }
 
-    void Shader::compile()
+    void Shader::compile() const
     {
         if (program_id != 0)
         {
@@ -98,18 +98,18 @@ namespace od
         glDeleteShader(fragment_id);
     }
 
-    void Shader::bind()
+    void Shader::bind() const
     {
         compile();
         glUseProgram(program_id);
     }
 
-    void Shader::unbind()
+    void Shader::unbind() const
     {
         glUseProgram(0);
     }
         
-    void Shader::release()
+    void Shader::release() const
     {
         if (program_id != 0)
         {
@@ -123,7 +123,7 @@ namespace od
         return glGetAttribLocation(program_id, name.c_str());
     }
 
-    void Shader::set_uniform(const std::string& name, const Matrix44& value)
+    void Shader::set_uniform(const std::string& name, const Matrix44& value) const
     {
         int location = glGetUniformLocation(program_id, name.c_str());
         if (location != -1)

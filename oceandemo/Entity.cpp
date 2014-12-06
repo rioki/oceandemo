@@ -12,4 +12,6 @@ namespace od
     {
         ::od::translate(transform, v);
     }
+
+    void Entity::draw(Camera& camera) const {}
 }

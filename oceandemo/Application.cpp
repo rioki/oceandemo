@@ -4,11 +4,13 @@
 #include <GL/glew.h>
 #include <stdexcept>
 
+#include "Ocean.h"
+
 namespace od
 {
     Application::Application()
     : running(false), window(nullptr), glcontext(nullptr),
-      camera(nullptr), ocean(nullptr)
+      scene(nullptr), camera(nullptr)
     {
         int r = SDL_Init(SDL_INIT_VIDEO);
         if (r != 0) 
@@ -42,14 +44,19 @@ namespace od
 
         // everything that uses OpenGL need to be initialized after glew, thus pointers.
 
+        scene = new Scene;
         camera = new Camera;
         // CHECK ME
         camera->translate(Vector3(0, 0, -3));
-        ocean  = new Ocean;
+        scene->add_enttiy(camera);
+
+        scene->add_enttiy(new Ocean);
     }
 
     Application::~Application() 
     {
+        delete scene;
+
         if (glcontext != nullptr)
         {
             SDL_GL_DeleteContext(glcontext);
@@ -80,7 +87,7 @@ namespace od
         glViewport(0, 0, 1600, 900);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        ocean->draw(*camera);
+        scene->draw(*camera);
             
         SDL_GL_SwapWindow(window); 
     }
@@ -95,8 +102,25 @@ namespace od
                 case SDL_QUIT:
                     running = false;
                     break; 
+
+                case SDL_KEYDOWN:
+                    handle_key_press(event.key.keysym);
+                    break;
+                case SDL_KEYUP:
+                    handle_key_release(event.key.keysym);
+                    break;
              }
         }
+    }
+
+    void Application::handle_key_press(SDL_Keysym key)
+    {
+        
+    }
+
+    void Application::handle_key_release(SDL_Keysym key)
+    {
+    
     }
 }
 

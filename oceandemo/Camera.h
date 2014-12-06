@@ -16,7 +16,7 @@ namespace od
 
         ~Camera();
 
-        void setup(Shader& shader) const;        
+        void setup(const Shader& shader) const;        
 
     private:
         float fov;

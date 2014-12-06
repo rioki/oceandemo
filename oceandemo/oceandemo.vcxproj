@@ -96,6 +96,7 @@ xcopy /Y $(SolutionDir)contrib\glew-1.11.0\bin\Release\Win32\*.dll $(OutDir)</Co
     <ClCompile Include="Matrix44.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Ocean.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Vector4.cpp" />
     <ClCompile Include="Vector2.cpp" />
@@ -109,6 +110,7 @@ xcopy /Y $(SolutionDir)contrib\glew-1.11.0\bin\Release\Win32\*.dll $(OutDir)</Co
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Ocean.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />

@@ -24,22 +24,22 @@ namespace od
 
         const std::string& get_fragment_code() const;
 
-        void compile();
+        void compile() const;
 
-        void bind();
+        void bind() const;
 
-        void unbind();
+        void unbind() const;
         
-        void release();
+        void release() const;
         
         int get_attribute_location(const std::string& name) const;
 
-        void set_uniform(const std::string& name, const Matrix44& value);
+        void set_uniform(const std::string& name, const Matrix44& value) const;
 
     private:
         std::string vertex_code;
         std::string fragment_code;
-        unsigned int program_id;
+        mutable unsigned int program_id;
 
         Shader(const Shader&) = delete;
         const Shader& operator = (const Shader&) = delete;

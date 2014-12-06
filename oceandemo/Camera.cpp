@@ -10,7 +10,7 @@ namespace od
 
     Camera::~Camera() {}
 
-    void Camera::setup(Shader& shader) const
+    void Camera::setup(const Shader& shader) const
     {
         // TODO compute projection and view only after changes
         int viewport[4];

@@ -6,6 +6,8 @@
 
 namespace od
 {
+    class Camera;
+    
     class Entity
     {
     public:
@@ -15,6 +17,8 @@ namespace od
         virtual ~Entity();
 
         void translate(const Vector3& v);
+
+        virtual void draw(Camera& camera) const;
 
     protected:
         Matrix44 transform;

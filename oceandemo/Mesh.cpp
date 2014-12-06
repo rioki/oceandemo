@@ -46,13 +46,13 @@ namespace od
         faces.push_back(face); 
     }
 
-    void Mesh::upload()
+    void Mesh::upload() const
     {
         assert(vertexes.size() == normals.size() && vertexes.size() == texcoords.size());
 
         if (tangents.size() != vertexes.size())
         {
-            compute_tangents();
+            const_cast<Mesh*>(this)->compute_tangents();
         }
 
         glGenVertexArrays(1, &vao);
@@ -85,7 +85,7 @@ namespace od
         glBindVertexArray(0);
     }
 
-    void Mesh::release()
+    void Mesh::release() const
     {
         if (buffers[0] != 0)
         {
@@ -95,7 +95,7 @@ namespace od
         }
     }
 
-    void Mesh::draw(Shader& shader) const    
+    void Mesh::draw(const Shader& shader) const    
     {
         if (buffers[0] == 0)
         {
