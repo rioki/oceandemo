@@ -40,5 +40,21 @@ namespace od
         {
             entity->draw(camera);
         }
-    }    
+    }
+    
+    void Scene::update(float t, float dt) 
+    {
+        for (Entity* entity : entities)
+        {
+            entity->update(t, dt);
+        }
+    }
+
+    void Scene::handle_event(const SDL_Event& e)
+    {
+        for (Entity* entity : entities)
+        {
+            entity->handle_event(e);
+        }
+    }
 }

@@ -3,6 +3,7 @@
 #define _OD_SCENE_H_
 
 #include <list>
+#include <SDL.h>
 
 namespace od
 {
@@ -20,7 +21,11 @@ namespace od
 
         void remove_entity(Entity* entity);
 
-        void draw(Camera& camera);
+        virtual void draw(Camera& camera);
+
+        virtual void update(float t, float dt);
+
+        virtual void handle_event(const SDL_Event& e);
 
     private:
         std::list<Entity*> entities;

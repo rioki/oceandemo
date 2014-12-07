@@ -71,6 +71,21 @@ namespace od
         return data;
     }
 
+    Vector4 Matrix44::col(unsigned int i) const
+    {
+        const Matrix44& m = *this;
+        return Vector4(m(i, 0), m(i, 1), m(i, 2), m(i, 3));
+    }
+
+    void Matrix44::col(unsigned int i, Vector4 value)
+    {
+        Matrix44& m = *this;
+        m(i, 0) = value(0);
+        m(i, 1) = value(1);
+        m(i, 2) = value(2);
+        m(i, 3) = value(3);
+    }
+
     Matrix44 operator + (const Matrix44& a, const Matrix44& b)
     {
         Matrix44 tmp;
@@ -134,6 +149,21 @@ namespace od
         return r;
     }    
 
+    Matrix44 transpose(Matrix44 m)
+    {
+        Matrix44 r;
+
+        for (unsigned int i = 0; i < 4; i++)
+        {
+            for (unsigned int j = 0; j < 4; j++)
+            {
+               r(j, i) = m(i, j); 
+            }
+        }
+
+        return r;
+    }
+
     Matrix44 frustum(float left, float right, float bottom, float top, float znear, float zfar)
     {
         float temp1 = 2.0f * znear;
@@ -157,7 +187,7 @@ namespace od
 
     Matrix44 lookat(Vector3 position, Vector3 target, Vector3 up)
     {
-        Vector3 forward = normalize(target - position);
+        Vector3 forward = normalize(position - target);
 
         Vector3 side    = normalize(cross(forward, up));
         // correct up to be perfectly perpendicular
@@ -182,5 +212,42 @@ namespace od
         m2(3, 3) = m(0, 3)*p(0) + m(1, 3)*p(1) + m(2, 3)*p(2) + m(3, 3);
 
         return m2;
+    }
+
+    Matrix44 rotate(const Matrix44& m, const Vector3& v, float angle)
+    {
+        float a = angle * PI / 360.0f;
+        float c = std::cos(a);
+        float s = std::sin(a);
+        
+        Vector3 axis = normalize(v);
+
+        Vector3 t = axis * (1 - c);
+
+        Matrix44 d(1);
+        d(0,0) = c + t(0) * axis(0);
+        d(0,1) = 0 + t(0) * axis(1) + s * axis(2);
+        d(0,2) = 0 + t(0) * axis(2) - s * axis(1);
+
+        d(1,0) = 0 + t(1) * axis(0) - s * axis(2);
+        d(1,1) = c + t(1) * axis(1);
+        d(1,2) = 0 + t(1) * axis(2) + s * axis(0);
+
+        d(2,0) = 0 + t(2) * axis(0) + s * axis(1);
+        d(2,1) = 0 + t(2) * axis(1) - s * axis(0);
+        d(2,2) = c + t(2) * axis(2);
+        
+        Matrix44 r;
+        r.col(0, m.col(0) * d(0,0) + m.col(1) * d(0,1) + m.col(2) * d(0,2));
+        r.col(1, m.col(0) * d(1,0) + m.col(1) * d(1,1) + m.col(2) * d(1,2));
+        r.col(2, m.col(0) * d(2,0) + m.col(1) * d(2,1) + m.col(2) * d(2,2));
+        r.col(3, m.col(3));
+        
+        return r;
+    }
+
+    Vector3 transform(const Matrix44& m, const Vector3& v)
+    {
+        return Vector3(m * Vector4(v, 0.0f));
     }
 }

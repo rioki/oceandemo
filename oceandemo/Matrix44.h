@@ -30,6 +30,9 @@ namespace od
 
         const float* c_array() const;
 
+        Vector4 col(unsigned int i) const;
+        void col(unsigned int i, Vector4 value);
+
     private:
         float data[16];
     };    
@@ -38,12 +41,16 @@ namespace od
     Matrix44 operator - (const Matrix44& a, const Matrix44& b);
     Matrix44 operator * (const Matrix44& a, const Matrix44& b);
     Vector4 operator  * (const Matrix44& m, const Vector4& v);
+    Matrix44 transpose(Matrix44 m);
 
     Matrix44 frustum(float left, float right, float bottom, float top, float znear, float zfar);
     Matrix44 perspective(float fov, float aspect, float znear, float zfar);
     Matrix44 lookat(Vector3 position, Vector3 target, Vector3 up);
 
     Matrix44 translate(const Matrix44& m, const Vector3& p);
+    Matrix44 rotate(const Matrix44& m, const Vector3& v, float angle);
+
+    Vector3 transform(const Matrix44& m, const Vector3& v);
 }
 
 #endif

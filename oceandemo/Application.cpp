@@ -3,7 +3,9 @@
 
 #include <GL/glew.h>
 #include <stdexcept>
+#include <ctime>
 
+#include "FlyController.h"
 #include "Ocean.h"
 
 namespace od
@@ -50,6 +52,9 @@ namespace od
         camera->translate(Vector3(0, 0, -3));
         scene->add_enttiy(camera);
 
+        FlyController* ctrl = new FlyController(camera);
+        scene->add_enttiy(ctrl);
+
         scene->add_enttiy(new Ocean);
     }
 
@@ -74,10 +79,17 @@ namespace od
 
     void Application::run() 
     {
+        std::clock_t last_tick = std::clock();
         running = true;
         while (running)
-        {
+        {   
+            std::clock_t now = std::clock();
+            float t  = static_cast<float>(now) / static_cast<float>(CLOCKS_PER_SEC);
+            float dt = static_cast<float>(now - last_tick) / static_cast<float>(CLOCKS_PER_SEC);
+            last_tick = now;
+
             handle_events();
+            scene->update(t, dt);
             draw();
         }
     }
@@ -104,23 +116,16 @@ namespace od
                     break; 
 
                 case SDL_KEYDOWN:
-                    handle_key_press(event.key.keysym);
-                    break;
                 case SDL_KEYUP:
-                    handle_key_release(event.key.keysym);
+                case SDL_MOUSEBUTTONDOWN:
+                case SDL_MOUSEBUTTONUP:
+                case SDL_MOUSEMOTION:
+                case SDL_MOUSEWHEEL:
+                    // TODO Abstract SDL_Event out
+                    scene->handle_event(event);
                     break;
              }
         }
-    }
-
-    void Application::handle_key_press(SDL_Keysym key)
-    {
-        
-    }
-
-    void Application::handle_key_release(SDL_Keysym key)
-    {
-    
     }
 }
 
