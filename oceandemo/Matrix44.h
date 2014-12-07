@@ -43,7 +43,7 @@ namespace od
     Matrix44 perspective(float fov, float aspect, float znear, float zfar);
     Matrix44 lookat(Vector3 position, Vector3 target, Vector3 up);
 
-    void translate(Matrix44& m, const Vector3& p);
+    Matrix44 translate(const Matrix44& m, const Vector3& p);
 }
 
 #endif

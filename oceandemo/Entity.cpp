@@ -10,7 +10,7 @@ namespace od
 
     void Entity::translate(const Vector3& v)
     {
-        ::od::translate(transform, v);
+        transform = ::od::translate(transform, v);
     }
 
     void Entity::draw(Camera& camera) const {}
