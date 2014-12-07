@@ -7,6 +7,7 @@
 
 #include "FlyController.h"
 #include "Ocean.h"
+#include "SkyBox.h"
 
 namespace od
 {
@@ -55,7 +56,8 @@ namespace od
         FlyController* ctrl = new FlyController(camera);
         scene->add_enttiy(ctrl);
 
-        scene->add_enttiy(new Ocean);
+        scene->add_enttiy(new SkyBox);
+        scene->add_enttiy(new Ocean);        
     }
 
     Application::~Application() 

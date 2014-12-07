@@ -51,6 +51,15 @@
     <ClCompile Include="FlyController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cubemap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -95,6 +104,15 @@
     <ClInclude Include="FlyController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cubemap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="oceandemo.rc">
@@ -106,6 +124,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Ocean.vert.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Sky\Sky.frag.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Assets\Sky\Sky.vert.glsl">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
