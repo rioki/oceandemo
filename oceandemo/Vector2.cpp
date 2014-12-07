@@ -1,8 +1,8 @@
 
 #include "Vector2.h"
 
-#include <cassert>
-#include <cstring>
+#include "Vector3.h"
+#include "Vector4.h"
 
 namespace od
 {
@@ -14,29 +14,18 @@ namespace od
         data[1] = y;
     }
 
-    Vector2::Vector2(const Vector2& other)
+    Vector2::Vector2(const Vector3& other)
     {
-        std::memcpy(data, other.data, 2*sizeof(float));
+        data[0] = other(0);
+        data[1] = other(1);
     }
 
-    const Vector2& Vector2::operator = (const Vector2& other)
+    Vector2::Vector2(const Vector4& other)
     {
-        if (this != &other)
-        {
-            std::memcpy(data, other.data, 2*sizeof(float));
-        }
-        return *this;
+        data[0] = other(0);
+        data[1] = other(1);
     }
 
-    float& Vector2::operator () (unsigned int i)    
-    {
-        assert(i < 2);
-        return data[i];
-    }
-
-    float Vector2::operator () (unsigned int i) const
-    {
-        assert(i < 2);
-        return data[i];
-    }
+    Vector2::Vector2(const Vector<2>& other)
+    : Vector<2>(other) {}
 }

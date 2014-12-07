@@ -112,6 +112,7 @@ xcopy /Y $(SolutionDir)contrib\glew-1.11.0\bin\Release\Win32\*.dll $(OutDir)</Co
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Vector.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vector4.h" />

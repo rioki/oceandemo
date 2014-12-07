@@ -4,6 +4,9 @@
 #include <cassert>
 #include <cstring>
 
+#include "Vector2.h"
+#include "Vector3.h"
+
 namespace od
 {
     Vector4::Vector4() {}
@@ -16,29 +19,22 @@ namespace od
         data[3] = m;
     }
 
-    Vector4::Vector4(const Vector4& other)
+    Vector4::Vector4(const Vector2& other, float z, float m)
     {
-        std::memcpy(data, other.data, 4*sizeof(float));
+        data[0] = other(0);
+        data[1] = other(1);
+        data[2] = z;
+        data[3] = m;
     }
 
-    const Vector4& Vector4::operator = (const Vector4& other)
+    Vector4::Vector4(const Vector3& other, float m)
     {
-        if (this != &other)
-        {
-            std::memcpy(data, other.data, 4*sizeof(float));
-        }
-        return *this;
+        data[0] = other(0);
+        data[1] = other(1);
+        data[2] = other(2);
+        data[3] = m;
     }
 
-    float& Vector4::operator () (unsigned int i) 
-    {
-        assert(i < 4);
-        return data[i];
-    }
-
-    float Vector4::operator () (unsigned int i) const
-    {
-        assert(i < 4);
-        return data[i];
-    }
+    Vector4::Vector4(const Vector<4>& other)
+    : Vector<4>(other) {}
 }

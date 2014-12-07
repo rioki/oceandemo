@@ -2,9 +2,14 @@
 #ifndef _OD_VECTOR2_H_
 #define _OD_VECTOR2_H_
 
+#include "Vector.h"
+
 namespace od
 {
-    class Vector2
+    class Vector3;
+    class Vector4;
+    
+    class Vector2 : public Vector<2>
     {
     public:
 
@@ -12,16 +17,11 @@ namespace od
 
         Vector2(float x, float y);
 
-        Vector2(const Vector2& other);
+        Vector2(const Vector3& other);
 
-        const Vector2& operator = (const Vector2& other);
+        Vector2(const Vector4& other);
 
-        float& operator () (unsigned int i);
-        float operator () (unsigned int i) const;
-
-    private:
-        float data[2];
-
+        Vector2(const Vector<2>& other);        
     };
 }
 
