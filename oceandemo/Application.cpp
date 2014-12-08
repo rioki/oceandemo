@@ -45,6 +45,9 @@ namespace od
             throw std::runtime_error((const char*)glewGetErrorString(err));
         }        
 
+        SDL_ShowCursor(0);
+        SDL_SetRelativeMouseMode(SDL_TRUE);
+
         // everything that uses OpenGL need to be initialized after glew, thus pointers.
 
         scene = new Scene;
@@ -118,6 +121,11 @@ namespace od
                     break; 
 
                 case SDL_KEYDOWN:
+                    if (event.key.keysym.sym == SDLK_ESCAPE) 
+                    {
+                        running = false;
+                    }
+                // fallthough
                 case SDL_KEYUP:
                 case SDL_MOUSEBUTTONDOWN:
                 case SDL_MOUSEBUTTONUP:
