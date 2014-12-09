@@ -123,6 +123,32 @@ namespace od
         return glGetAttribLocation(program_id, name.c_str());
     }
 
+    void Shader::set_uniform(const std::string& name, int value) const
+    {
+        int location = glGetUniformLocation(program_id, name.c_str());
+        if (location != -1)
+        {
+            glUniform1i(location, value);
+        }        
+    }
+
+    void Shader::set_uniform(const std::string& name, float value) const
+    {
+        int location = glGetUniformLocation(program_id, name.c_str());
+        if (location != -1)
+        {
+            glUniform1f(location, value);
+        } 
+    }
+    
+    void Shader::set_uniform(const std::string& name, unsigned int value) const
+    {
+        int location = glGetUniformLocation(program_id, name.c_str());
+        if (location != -1)
+        {
+            glUniform1ui(location, value);
+        }  
+    }
     void Shader::set_uniform(const std::string& name, const Matrix44& value) const
     {
         int location = glGetUniformLocation(program_id, name.c_str());

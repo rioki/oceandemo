@@ -6,6 +6,7 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "Texture.h"
 
 namespace od
 {    
@@ -18,9 +19,12 @@ namespace od
 
         void draw(Camera& camera) const override;
 
+        void update(float t, float dt) override;
+
     private:
-        Shader shader;
-        Mesh   plane;
+        Shader  shader;
+        Mesh    plane;
+        Texture noise;
 
         Ocean(const Ocean&) = delete;
         const Ocean& operator = (const Ocean&) = delete;

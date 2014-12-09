@@ -5,7 +5,7 @@ uniform mat4 aView;
 
 in vec3 aVertex;
 
-smooth out vec3 vTexCoord;
+out vec3 vTexCoord;
 
 void main()
 {

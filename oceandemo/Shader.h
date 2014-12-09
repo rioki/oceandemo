@@ -34,6 +34,12 @@ namespace od
         
         int get_attribute_location(const std::string& name) const;
 
+        void set_uniform(const std::string& name, int value) const;
+
+        void set_uniform(const std::string& name, unsigned int value) const;
+
+        void set_uniform(const std::string& name, float value) const;
+
         void set_uniform(const std::string& name, const Matrix44& value) const;
 
     private:

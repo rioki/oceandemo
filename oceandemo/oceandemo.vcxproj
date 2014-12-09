@@ -104,6 +104,7 @@ xcopy /Y $(SolutionDir)contrib\glew-1.11.0\bin\Release\Win32\*.dll $(OutDir)</Co
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector4.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
@@ -122,19 +123,17 @@ xcopy /Y $(SolutionDir)contrib\glew-1.11.0\bin\Release\Win32\*.dll $(OutDir)</Co
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vector4.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="oceandemo.rc" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="..\Assets\Ocean\Ocean.frag.glsl" />
+    <None Include="..\Assets\Ocean\Ocean.vert.glsl" />
     <None Include="..\Assets\Sky\Sky.frag.glsl" />
     <None Include="..\Assets\Sky\Sky.vert.glsl" />
-    <None Include="Ocean.frag.glsl" />
-    <None Include="Ocean.vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
