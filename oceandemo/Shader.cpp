@@ -149,7 +149,7 @@ namespace od
             glUniform1ui(location, value);
         }  
     }
-    void Shader::set_uniform(const std::string& name, const Matrix44& value) const
+    void Shader::set_uniform(const std::string& name, const rgm::mat4& value) const
     {
         int location = glGetUniformLocation(program_id, name.c_str());
         if (location != -1)

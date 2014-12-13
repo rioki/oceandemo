@@ -53,7 +53,7 @@ namespace od
         scene = new Scene;
         camera = new Camera;
         // CHECK ME
-        camera->translate(Vector3(0, 0, -3));
+        camera->translate(rgm::vec3(0, 0, -3));
         scene->add_enttiy(camera);
 
         FlyController* ctrl = new FlyController(camera);

@@ -20,31 +20,31 @@ namespace od
     void FlyController::update(float t, float dt)
     {
         float   speed = 10.0f;
-        Vector3 dv(0, 0, 0);
+        rgm::vec3 dv(0, 0, 0);
 
         if (move_forward)
         {
-            dv += Vector3(1, 0, 0);
+            dv = dv + rgm::vec3(1, 0, 0);
         }
         if (move_back)
         {
-            dv += Vector3(-1, 0, 0);
+            dv = dv + rgm::vec3(-1, 0, 0);
         }
         if (move_left)
         {
-            dv += Vector3(0, 1, 0);
+            dv = dv + rgm::vec3(0, 1, 0);
         }
         if (move_right)
         {
-            dv += Vector3(0, -1, 0);
+            dv = dv + rgm::vec3(0, -1, 0);
         }
         if (move_down)
         {
-            dv += Vector3(0, 0, 1);
+            dv = dv + rgm::vec3(0, 0, 1);
         }
         if (move_up)
         {
-            dv += Vector3(0, 0, -1);
+            dv = dv + rgm::vec3(0, 0, -1);
         }
 
         translate(dv);
@@ -117,15 +117,15 @@ namespace od
                     pitch -= static_cast<float>(e.motion.xrel);
                     yaw   -= static_cast<float>(e.motion.yrel);
 
-                    Vector3 p(transform(3, 0), transform(3, 1), transform(3, 2));
+                    rgm::vec3 p(transform[3][0], transform[3][1], transform[3][2]);
 
-                    Matrix44 m(1);
-                    m = ::od::rotate(m, Vector3(0, 0, 1), pitch);
-                    m = ::od::rotate(m, Vector3(0, 1, 0), yaw);
+                    rgm::mat4 m(1);
+                    m = rgm::rotate(m, rgm::vec3(0, 0, 1), pitch);
+                    m = rgm::rotate(m, rgm::vec3(0, 1, 0), yaw);
 
-                    m(3,0) = p(0);
-                    m(3,1) = p(1);
-                    m(3,2) = p(2);
+                    m[3][0] = p[0];
+                    m[3][1] = p[1];
+                    m[3][2] = p[2];
 
                     transform = m;
                 }               

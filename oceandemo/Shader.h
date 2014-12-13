@@ -4,7 +4,7 @@
 
 #include <string>
 
-#include "Matrix44.h"
+#include <rgm/rgm.h>
 
 namespace od
 {
@@ -40,7 +40,7 @@ namespace od
 
         void set_uniform(const std::string& name, float value) const;
 
-        void set_uniform(const std::string& name, const Matrix44& value) const;
+        void set_uniform(const std::string& name, const rgm::mat4& value) const;
 
     private:
         std::string vertex_code;

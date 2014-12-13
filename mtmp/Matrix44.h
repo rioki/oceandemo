@@ -5,9 +5,11 @@
 #include "Vector3.h"
 #include "VEctor4.h"
 
+#include "Matrix.h"
+
 namespace od
 {
-    class Matrix44
+    class Matrix44 : public Matrix<4, 4>
     {
     public:
 
@@ -20,28 +22,8 @@ namespace od
                  float v2, float v6, float v10, float v14,
                  float v3, float v7, float v11, float v15);
 
-        Matrix44(const Matrix44& m);
-
-        const Matrix44& operator = (const Matrix44& m);
-
-        float& operator () (unsigned int i, unsigned j);
-
-        float operator () (unsigned int i, unsigned j) const;
-
-        const float* c_array() const;
-
-        Vector4 col(unsigned int i) const;
-        void col(unsigned int i, Vector4 value);
-
-    private:
-        float data[16];
+        Matrix44(const Matrix<4, 4>& other);
     };    
-
-    Matrix44 operator + (const Matrix44& a, const Matrix44& b);
-    Matrix44 operator - (const Matrix44& a, const Matrix44& b);
-    Matrix44 operator * (const Matrix44& a, const Matrix44& b);
-    Vector4 operator  * (const Matrix44& m, const Vector4& v);
-    Matrix44 transpose(Matrix44 m);
 
     Matrix44 frustum(float left, float right, float bottom, float top, float znear, float zfar);
     Matrix44 perspective(float fov, float aspect, float znear, float zfar);

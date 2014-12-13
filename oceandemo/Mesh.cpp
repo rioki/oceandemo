@@ -26,7 +26,17 @@ namespace od
         release();
     }
 
-    unsigned int Mesh::add_vertex(const Vector3& vertex, const Vector3& normal, const Vector2& texcoord)
+    unsigned int Mesh::get_vertex_count() const
+    {
+        return vertexes.size();
+    }
+
+    unsigned int Mesh::get_face_count() const
+    {
+        return faces.size();
+    }
+
+    unsigned int Mesh::add_vertex(const rgm::vec3& vertex, const rgm::vec3& normal, const rgm::vec2& texcoord)
     {
         vertexes.push_back(vertex);
         normals.push_back(normal);
@@ -169,34 +179,34 @@ namespace od
 
     void Mesh::compute_tangents()
     {
-        std::vector<Vector3> tan1(vertexes.size(), Vector3(0, 0, 0));
-        std::vector<Vector3> tan2(vertexes.size(), Vector3(0, 0, 0));
+        std::vector<rgm::vec3> tan1(vertexes.size(), rgm::vec3(0, 0, 0));
+        std::vector<rgm::vec3> tan2(vertexes.size(), rgm::vec3(0, 0, 0));
         
         for (Face face : faces)
         {
-            Vector3 v1 = Vector3(vertexes[face.a]);
-            Vector3 v2 = Vector3(vertexes[face.b]);
-            Vector3 v3 = Vector3(vertexes[face.c]);
+            rgm::vec3 v1 = rgm::vec3(vertexes[face.a]);
+            rgm::vec3 v2 = rgm::vec3(vertexes[face.b]);
+            rgm::vec3 v3 = rgm::vec3(vertexes[face.c]);
             
-            Vector2 w1 = texcoords[face.a];
-            Vector2 w2 = texcoords[face.b];
-            Vector2 w3 = texcoords[face.c];
+            rgm::vec2 w1 = texcoords[face.a];
+            rgm::vec2 w2 = texcoords[face.b];
+            rgm::vec2 w3 = texcoords[face.c];
             
-            float x1 = v2(0) - v1(0);
-            float x2 = v3(0) - v1(0);
-            float y1 = v2(1) - v1(1);
-            float y2 = v3(1) - v1(1);
-            float z1 = v2(2) - v1(2);
-            float z2 = v3(2) - v1(2);
+            float x1 = v2[0] - v1[0];
+            float x2 = v3[0] - v1[0];
+            float y1 = v2[1] - v1[1];
+            float y2 = v3[1] - v1[1];
+            float z1 = v2[2] - v1[2];
+            float z2 = v3[2] - v1[2];
             
-            float s1 = w2(0) - w1(0);
-            float s2 = w3(0) - w1(0);
-            float t1 = w2(1) - w1(1);
-            float t2 = w3(1) - w1(1);
+            float s1 = w2[0] - w1[0];
+            float s2 = w3[0] - w1[0];
+            float t1 = w2[1] - w1[1];
+            float t2 = w3[1] - w1[1];
             
             float r = 1.0F / (s1 * t2 - s2 * t1);
-            Vector3 sdir((t2 * x1 - t1 * x2) * r, (t2 * y1 - t1 * y2) * r, (t2 * z1 - t1 * z2) * r);
-            Vector3 tdir((s1 * x2 - s2 * x1) * r, (s1 * y2 - s2 * y1) * r, (s1 * z2 - s2 * z1) * r);
+            rgm::vec3 sdir((t2 * x1 - t1 * x2) * r, (t2 * y1 - t1 * y2) * r, (t2 * z1 - t1 * z2) * r);
+            rgm::vec3 tdir((s1 * x2 - s2 * x1) * r, (s1 * y2 - s2 * y1) * r, (s1 * z2 - s2 * z1) * r);
             
             tan1[face.a] = tan1[face.a] + sdir;
             tan1[face.b] = tan1[face.b] + sdir;
@@ -210,9 +220,9 @@ namespace od
         tangents.resize(vertexes.size());
         for (unsigned int i = 0; i < vertexes.size(); i++)
         {
-            Vector3& n = normals[i];
-            Vector3& t1 = tan1[i];
-            Vector3& t2 = tan2[i];
+            rgm::vec3& n = normals[i];
+            rgm::vec3& t1 = tan1[i];
+            rgm::vec3& t2 = tan2[i];
             
             if (dot(cross(n, t1), t2) < 0.0f) 
             {

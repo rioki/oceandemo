@@ -4,8 +4,7 @@
 
 #include <string>
 #include <SDL.h>
-
-#include "Vector4.h"
+#include <rgm/rgm.h>
 
 namespace od
 {
@@ -19,9 +18,9 @@ namespace od
 
         ~Texture();
 
-        Vector4 get_pixel(unsigned int i, unsigned int j) const;
+        rgm::vec4 get_pixel(unsigned int i, unsigned int j) const;
 
-        void set_pixel(unsigned int i, unsigned int j, Vector4 value);
+        void set_pixel(unsigned int i, unsigned int j, rgm::vec4 value);
 
         void bind(unsigned int channel) const;
 

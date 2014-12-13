@@ -13,10 +13,10 @@ namespace od
         shader.set_fragment_code(fs::readfile("../Assets/Sky/Sky.frag.glsl"));
         shader.compile();
 
-        mesh.add_vertex(Vector3(-1, -1, 0), Vector3(0, 0, 1), Vector2(0, 0));
-        mesh.add_vertex(Vector3( 1, -1, 0), Vector3(0, 0, 1), Vector2(1, 0));
-        mesh.add_vertex(Vector3( 1,  1, 0), Vector3(0, 0, 1), Vector2(1, 1));
-        mesh.add_vertex(Vector3(-1,  1, 0), Vector3(0, 0, 1), Vector2(0, 1));
+        mesh.add_vertex(rgm::vec3(-1, -1, 0), rgm::vec3(0, 0, 1), rgm::vec2(0, 0));
+        mesh.add_vertex(rgm::vec3( 1, -1, 0), rgm::vec3(0, 0, 1), rgm::vec2(1, 0));
+        mesh.add_vertex(rgm::vec3( 1,  1, 0), rgm::vec3(0, 0, 1), rgm::vec2(1, 1));
+        mesh.add_vertex(rgm::vec3(-1,  1, 0), rgm::vec3(0, 0, 1), rgm::vec2(0, 1));
         mesh.add_face(0, 1, 2);
         mesh.add_face(0, 2, 3);
 

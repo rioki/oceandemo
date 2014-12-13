@@ -82,7 +82,7 @@ namespace od
         }
     }
 
-    Vector4 Texture::get_pixel(unsigned int i, unsigned int j) const
+    rgm::vec4 Texture::get_pixel(unsigned int i, unsigned int j) const
     {
         if (i < surface->w && i >= 0 &&
              j < surface->h && j >= 0)
@@ -90,10 +90,10 @@ namespace od
             Uint32 p = getpixel(surface, i, j);
             Uint8 r, g, b, a;
             SDL_GetRGBA(p, surface->format, &r, &g, &b, &a);
-            return Vector4(static_cast<float>(r)/255.0,
-                           static_cast<float>(g)/255.0,
-                           static_cast<float>(b)/255.0,
-                           static_cast<float>(a)/255.0);
+            return rgm::vec4(static_cast<float>(r)/255.0,
+                             static_cast<float>(g)/255.0,
+                             static_cast<float>(b)/255.0,
+                             static_cast<float>(a)/255.0);
         }
         else
         {
@@ -134,15 +134,15 @@ namespace od
         }
     }
 
-    void Texture::set_pixel(unsigned int i, unsigned int j, Vector4 value)
+    void Texture::set_pixel(unsigned int i, unsigned int j, rgm::vec4 value)
     {
         if (i < surface->w && i >= 0 &&
             j < surface->h && j >= 0)
         {
-            Uint8 r = static_cast<Uint8>(value(0) * 256.0f);
-            Uint8 g = static_cast<Uint8>(value(1) * 256.0f);
-            Uint8 b = static_cast<Uint8>(value(2) * 256.0f);
-            Uint8 a = static_cast<Uint8>(value(3) * 256.0f);
+            Uint8 r = static_cast<Uint8>(value[0] * 256.0f);
+            Uint8 g = static_cast<Uint8>(value[1] * 256.0f);
+            Uint8 b = static_cast<Uint8>(value[2] * 256.0f);
+            Uint8 a = static_cast<Uint8>(value[3] * 256.0f);
             Uint32 p = SDL_MapRGBA(surface->format, r, g, b, a);
             putpixel(surface, i, j, p);
         }

@@ -23,8 +23,13 @@ namespace od
 
     private:
         Shader  shader;
-        Mesh    plane;
+        Mesh    grid;
         Texture noise;
+
+        rgm::mat4 projector_matrix;
+
+        void create_grid(unsigned int x, unsigned int y);
+        void compute_projector(const rgm::mat4& camera_projection, const rgm::mat4& camera_view);
 
         Ocean(const Ocean&) = delete;
         const Ocean& operator = (const Ocean&) = delete;

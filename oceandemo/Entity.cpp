@@ -8,24 +8,24 @@ namespace od
 
     Entity::~Entity() {}
 
-    Matrix44 Entity::get_transform() const
+    rgm::mat4 Entity::get_transform() const
     {
         return transform;
     }
 
-    void Entity::set_transform(Matrix44 value)
+    void Entity::set_transform(rgm::mat4 value)
     {
         transform = value;
     }
 
-    void Entity::translate(const Vector3& v)
+    void Entity::translate(const rgm::vec3& v)
     {
-        transform = ::od::translate(transform, v);
+        transform = rgm::translate(transform, v);
     }
 
-    void Entity::rotate(const Vector3& axis, float angle)
+    void Entity::rotate(const rgm::vec3& axis, float angle)
     {
-        transform = ::od::rotate(transform, axis, angle);
+        transform = rgm::rotate(transform, axis, angle);
     }
 
     void Entity::draw(Camera& camera) const {}

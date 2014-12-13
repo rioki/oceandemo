@@ -3,8 +3,7 @@
 #define _OD_MESH_H_
 
 #include <vector>
-#include "Vector3.h"
-#include "Vector2.h"
+#include <rgm/rgm.h>
 
 #include "Shader.h"
 
@@ -18,7 +17,11 @@ namespace od
 
         ~Mesh();
 
-        unsigned int add_vertex(const Vector3& vertex, const Vector3& normal, const Vector2& texcoord);
+        unsigned int get_vertex_count() const;
+
+        unsigned int get_face_count() const;
+
+        unsigned int add_vertex(const rgm::vec3& vertex, const rgm::vec3& normal, const rgm::vec2& texcoord);
 
         void add_face(unsigned int a, unsigned int b, unsigned int c);
 
@@ -36,10 +39,10 @@ namespace od
             unsigned int c;
         };
 
-        std::vector<Vector3> vertexes;
-        std::vector<Vector3> normals;
-        std::vector<Vector2> texcoords;
-        std::vector<Vector3> tangents;
+        std::vector<rgm::vec3> vertexes;
+        std::vector<rgm::vec3> normals;
+        std::vector<rgm::vec2> texcoords;
+        std::vector<rgm::vec3> tangents;
         std::vector<Face>    faces;
 
         mutable unsigned int vao;

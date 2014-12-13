@@ -12,10 +12,7 @@ namespace od
     Matrix44::Matrix44() {}
 
     Matrix44::Matrix44(float v) 
-    {
-        std::memset(data, 0, 16 * sizeof(float));
-        data[0] = data[5] = data[10] = data[15] = v;        
-    }
+    : Matrix<4, 4>(v) {}
 
     Matrix44::Matrix44(float v0, float v4, float v8,  float v12,
                        float v1, float v5, float v9,  float v13,
@@ -40,129 +37,8 @@ namespace od
         data[15] = v15;
     }
 
-    Matrix44::Matrix44(const Matrix44& m)
-    {
-        std::memcpy(data, m.data, 16 * sizeof(float));
-    }
-
-    const Matrix44& Matrix44::operator = (const Matrix44& m)
-    {
-        if (this != &m) 
-        {
-            std::memcpy(data, m.data, 16 * sizeof(float));
-        }
-        return *this;
-    }
-
-    float& Matrix44::operator () (unsigned int i, unsigned j)
-    {
-        assert(i < 4 && j < 4);
-        return data[i * 4 + j];
-    }
-
-    float Matrix44::operator () (unsigned int i, unsigned j) const
-    {
-        assert(i < 4 && j < 4);
-        return data[i * 4 + j];
-    }
-
-    const float* Matrix44::c_array() const
-    {
-        return data;
-    }
-
-    Vector4 Matrix44::col(unsigned int i) const
-    {
-        const Matrix44& m = *this;
-        return Vector4(m(i, 0), m(i, 1), m(i, 2), m(i, 3));
-    }
-
-    void Matrix44::col(unsigned int i, Vector4 value)
-    {
-        Matrix44& m = *this;
-        m(i, 0) = value(0);
-        m(i, 1) = value(1);
-        m(i, 2) = value(2);
-        m(i, 3) = value(3);
-    }
-
-    Matrix44 operator + (const Matrix44& a, const Matrix44& b)
-    {
-        Matrix44 tmp;
-
-        for (unsigned int i = 0; i < 4; i++) 
-        {
-            for (unsigned int j = 0; j < 4; j++) 
-            {
-                tmp(i, j) = a(i, j) + b(i, j);
-            }
-        }
-
-        return tmp;
-    }
-
-    Matrix44 operator - (const Matrix44& a, const Matrix44& b)
-    {
-        Matrix44 tmp;
-
-        for (unsigned int i = 0; i < 4; i++) 
-        {
-            for (unsigned int j = 0; j < 4; j++) 
-            {
-                tmp(i, j) = a(i, j) - b(i, j);
-            }
-        }
-
-        return tmp;
-    }
-
-    Matrix44 operator * (const Matrix44& a, const Matrix44& b)
-    {
-        Matrix44 tmp;
-
-        for (unsigned int i = 0; i < 4; i++)
-        {
-            for (unsigned int j = 0; j < 4; j++)
-            {
-                for (unsigned int k = 0; k < 4; k++)
-                {
-                    tmp(i, j) += a(k, j) * b(i, k);
-                }                
-            }
-        }
-
-        return tmp;
-    }
-    
-    Vector4 operator * (const Matrix44& m, const Vector4& v)
-    {
-        Vector4 r(0, 0, 0, 0);
-        
-        for (unsigned int i = 0; i < 4; i++)
-        {
-            for (unsigned int j = 0; j < 4; j++)
-            {
-               r(i) += m(j,i) * v(j); 
-            }
-        }
-        
-        return r;
-    }    
-
-    Matrix44 transpose(Matrix44 m)
-    {
-        Matrix44 r;
-
-        for (unsigned int i = 0; i < 4; i++)
-        {
-            for (unsigned int j = 0; j < 4; j++)
-            {
-               r(j, i) = m(i, j); 
-            }
-        }
-
-        return r;
-    }
+    Matrix44::Matrix44(const Matrix<4, 4>& other)
+    : Matrix<4, 4>(other) {}
 
     Matrix44 frustum(float left, float right, float bottom, float top, float znear, float zfar)
     {
