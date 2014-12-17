@@ -8,6 +8,7 @@
 #include "FlyController.h"
 #include "Ocean.h"
 #include "SkyBox.h"
+#include "Terrain.h"
 
 namespace od
 {
@@ -53,6 +54,7 @@ namespace od
         scene = new Scene;
         camera = new Camera;
         // CHECK ME
+        camera->set_far(3000.0f);
         camera->translate(rgm::vec3(0, 0, -3));
         scene->add_enttiy(camera);
 
@@ -60,7 +62,11 @@ namespace od
         scene->add_enttiy(ctrl);
 
         scene->add_enttiy(new SkyBox);
-        scene->add_enttiy(new Ocean);        
+        //scene->add_enttiy(new Ocean);        
+
+        Terrain* terrain = new Terrain;
+        terrain->generate();
+        scene->add_enttiy(terrain);
     }
 
     Application::~Application() 

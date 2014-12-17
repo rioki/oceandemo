@@ -100,8 +100,16 @@ namespace od
         {
             for (unsigned int j = 0; j < yj; j++)
             {
-                float x = (-0.5 + i * static_cast<float>(stepx)) * 100.0f;
-                float y = (-0.5 + j * static_cast<float>(stepy)) * 100.0f;
+                float x;
+                if (j % 2 == 0)                                
+                {
+                    x = (-0.5f + (static_cast<float>(i) + 0.5f) * static_cast<float>(stepx)) * 100.0f;  
+                }
+                else 
+                {
+                    x = (-0.5f + (static_cast<float>(i)) * static_cast<float>(stepx)) * 100.0f;  
+                }
+                float y = (-0.5f + static_cast<float>(j) * static_cast<float>(stepy)) * 100.0f;
 
                 unsigned int v = grid.add_vertex(rgm::vec3(x, y, 0.0), rgm::vec3(0.0, 0.0, 1.0), rgm::vec2(x, y));
 

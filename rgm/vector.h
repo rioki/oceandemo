@@ -48,10 +48,19 @@ namespace rgm
 
         vector(const vector<T, N>& v) 
         {
-            // use assignement, since vector coule be complex
+            // use assignement, since vector could be complex
             for (unsigned int i = 0; i < N; i++)
             {
                 data[i] = v.data[i];
+            }
+        }
+
+        template <typename T2>
+        explicit vector(const vector<T2, N>& v) 
+        {
+            for (unsigned int i = 0; i < N; i++)
+            {
+                data[i] = static_cast<T>(v[i]);
             }
         }
 
@@ -109,7 +118,11 @@ namespace rgm
         }
 
         vector2(const vector<T, 2>& v)
-        : vector<T, 2>(v) {}        
+        : vector<T, 2>(v) {}       
+        
+        template <typename T2>
+        explicit vector2(const vector<T2, 2>& v) 
+        : vector<T, 2>(v) {} 
     };
 
     template <typename T>
@@ -145,6 +158,10 @@ namespace rgm
 
         vector3(const vector<T, 3>& v)
         : vector<T, 3>(v) {}
+
+        template <typename T2>
+        explicit vector3(const vector<T2, 3>& v) 
+        : vector<T, 2>(v) {}
     };
 
     template <typename T>
@@ -183,6 +200,10 @@ namespace rgm
 
         vector4(const vector<T, 4>& v)
         : vector<T, 4>(v) {}
+
+        template <typename T2>
+        explicit vector4(const vector<T2, 4>& v) 
+        : vector<T, 2>(v) {}
     };
 
     template <typename T, unsigned int N>

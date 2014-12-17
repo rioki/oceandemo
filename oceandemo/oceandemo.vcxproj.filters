@@ -50,6 +50,12 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -91,6 +97,12 @@
     <ClInclude Include="Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="snoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Assets\Ocean\Ocean.frag.glsl">
@@ -103,6 +115,12 @@
       <Filter>Shader Files</Filter>
     </None>
     <None Include="..\Assets\Sky\Sky.vert.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\Assets\Terrain\Ground.frag.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\Assets\Terrain\Ground.vert.glsl">
       <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>

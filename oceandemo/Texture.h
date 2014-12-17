@@ -8,15 +8,29 @@
 
 namespace od
 {
+    enum ColorMode
+    {
+        RGB       = 3,
+        RGBA      = 4
+    };
+
     class Texture
     {
     public:
 
-        Texture(unsigned int width, unsigned int height);
+        Texture();
+
+        Texture(unsigned int width, unsigned int height, ColorMode cm = RGBA);
 
         Texture(const std::string& file);
 
+        Texture(const Texture& other);
+
         ~Texture();
+
+        const Texture& operator = (const Texture& other);
+
+        ColorMode get_color_mode() const;
 
         rgm::vec4 get_pixel(unsigned int i, unsigned int j) const;
 

@@ -103,6 +103,8 @@ xcopy /Y $(SolutionDir)contrib\glew-1.11.0\bin\Release\Win32\*.dll $(OutDir)</Co
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="snoise.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +120,8 @@ xcopy /Y $(SolutionDir)contrib\glew-1.11.0\bin\Release\Win32\*.dll $(OutDir)</Co
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="snoise.h" />
+    <ClInclude Include="Terrain.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +129,8 @@ xcopy /Y $(SolutionDir)contrib\glew-1.11.0\bin\Release\Win32\*.dll $(OutDir)</Co
     <None Include="..\Assets\Ocean\Ocean.vert.glsl" />
     <None Include="..\Assets\Sky\Sky.frag.glsl" />
     <None Include="..\Assets\Sky\Sky.vert.glsl" />
+    <None Include="..\Assets\Terrain\Ground.frag.glsl" />
+    <None Include="..\Assets\Terrain\Ground.vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

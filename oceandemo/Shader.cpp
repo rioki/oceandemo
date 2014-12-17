@@ -149,6 +149,16 @@ namespace od
             glUniform1ui(location, value);
         }  
     }
+
+    void Shader::set_uniform(const std::string& name, const rgm::mat3& value) const
+    {
+        int location = glGetUniformLocation(program_id, name.c_str());
+        if (location != -1)
+        {
+            glUniformMatrix3fv(location, 1, GL_FALSE, value.c_array());
+        }
+    }
+
     void Shader::set_uniform(const std::string& name, const rgm::mat4& value) const
     {
         int location = glGetUniformLocation(program_id, name.c_str());

@@ -120,6 +120,17 @@ namespace rgm
     }
 
     template <typename T>
+    matrix<T, 4> scale(const matrix<T, 4>& m, const vector<T, 3>& v)
+    {
+        matrix<T, 4> r;
+        r[0] = m[0] * v[0];
+        r[1] = m[1] * v[1];
+        r[2] = m[2] * v[2];
+        r[3] = m[3];
+        return r;    
+    }
+
+    template <typename T>
     vector<T, 3> transform(const matrix<T, 4>& m, const vector<T, 3>& v)
     {
         return vector<T, 3>(m * vector<T, 4>(v, 0.0f));

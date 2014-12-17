@@ -7,8 +7,11 @@
 
 namespace od
 {
-    Texture::Texture(unsigned int width, unsigned int height)
-    : surface(nullptr), glid(0)
+    Texture::Texture()
+    : surface(nullptr), glid(0) {}
+
+    Texture::Texture(unsigned int width, unsigned int height, ColorMode cm)
+    : Texture()
     {
         Uint32 rmask, gmask, bmask, amask;
 
@@ -16,15 +19,31 @@ namespace od
             rmask = 0xff000000;
             gmask = 0x00ff0000;
             bmask = 0x0000ff00;
-            amask = 0x000000ff;
+            if (cm == RGBA)
+            {
+                amask = 0x000000ff;
+            }
+            else
+            {
+                amask = 0x00000000;
+            }
         #else
             rmask = 0x000000ff;
             gmask = 0x0000ff00;
             bmask = 0x00ff0000;
-            amask = 0xff000000;
+            if (cm == RGBA)
+            {
+                amask = 0xff000000;
+            }
+            else
+            {
+                amask = 0x00000000;
+            }
         #endif
+        unsigned int bpp = cm == RGBA ? 32 : 24;
 
-        surface = SDL_CreateRGBSurface(0, width, height, 32, rmask, gmask, bmask, amask);
+
+        surface = SDL_CreateRGBSurface(0, width, height, bpp, rmask, gmask, bmask, amask);
         if (surface == NULL) 
         {
             throw std::runtime_error(SDL_GetError());
@@ -32,13 +51,22 @@ namespace od
     }
 
     Texture::Texture(const std::string& file)
-    : surface(nullptr), glid(0)
+    : Texture()
     {
         surface = IMG_Load(file.c_str());
         if (surface == nullptr)
         {
             throw std::runtime_error(IMG_GetError());
         }
+    }
+
+    Texture::Texture(const Texture& other)
+    : surface(other.surface), glid(0)
+    {   
+        if (surface)
+        {
+            surface->refcount++;
+        }        
     }
 
     Texture::~Texture()
@@ -49,6 +77,31 @@ namespace od
             SDL_FreeSurface(surface);
             surface = nullptr;
         }
+    }
+
+    const Texture& Texture::operator = (const Texture& other)
+    {
+        if (this != &other)
+        {
+            release();
+            if (surface != nullptr)
+            {
+                SDL_FreeSurface(surface);
+                surface = nullptr;
+            }
+
+            surface = other.surface;
+            if (surface)
+            {
+                surface->refcount++;
+            }
+        }
+        return *this;
+    }
+
+    ColorMode Texture::get_color_mode() const
+    {
+        return static_cast<ColorMode>(surface->format->BytesPerPixel);
     }
 
     Uint32 getpixel(SDL_Surface *surface, int x, int y)
@@ -136,6 +189,11 @@ namespace od
 
     void Texture::set_pixel(unsigned int i, unsigned int j, rgm::vec4 value)
     {
+        if (surface->refcount > 1)
+        {
+            // TODO duplicate surface
+        }
+
         if (i < surface->w && i >= 0 &&
             j < surface->h && j >= 0)
         {
@@ -154,6 +212,12 @@ namespace od
 
     void Texture::bind(unsigned int channel) const
     {
+        if (surface == nullptr)
+        {
+            unbind(channel);
+            return;
+        }
+
         if (glid == 0)
         {
             upload();

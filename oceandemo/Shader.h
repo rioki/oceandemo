@@ -40,6 +40,8 @@ namespace od
 
         void set_uniform(const std::string& name, float value) const;
 
+        void set_uniform(const std::string& name, const rgm::mat3& value) const;
+
         void set_uniform(const std::string& name, const rgm::mat4& value) const;
 
     private:
